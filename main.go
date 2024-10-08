@@ -2,10 +2,11 @@ package main
 
 import (
 	"fmt"
-	"github.com/Irlandesee/advent_of_go/2023/day1"
+	"github.com/Irlandesee/advent_of_go/2023/day2"
+	"github.com/Irlandesee/advent_of_go/2023/util"
 )
 
 func main() {
-	resPartTwo := day1.SolvePartTwo("2023/day1/inputs/partTwoTest")
-	fmt.Println(resPartTwo)
+	resPartOne := day2.SolvePartOne(util.ReadFile("2023/day2/inputs/test"))
+	fmt.Println(resPartOne)
 }
