@@ -78,6 +78,27 @@ func parseStruct(line string) game {
 	return g
 }
 
+func isGamePossible(g game) bool {
+	maxReds := 12
+	maxGreens := 13
+	maxBlues := 14
+
+	totalReds := 0
+	totalGreens := 0
+	totalBlues := 0
+
+	for i := 0; i < len(g.sets); i++ {
+		totalReds += g.sets[i].numReds
+		totalGreens += g.sets[i].numGreens
+		totalBlues += g.sets[i].numBlues
+	}
+	if totalReds < maxReds && totalGreens < maxGreens && totalBlues < maxBlues {
+		fmt.Println("Found possible game: ", g)
+		return true
+	}
+	return false
+}
+
 func parteInput(input string) []game {
 	lines := strings.Split(input, "\n")
 	var games []game
@@ -91,10 +112,21 @@ func parteInput(input string) []game {
 func SolvePartOne(input string) int {
 	fmt.Println("Solving part one")
 	games := parteInput(input)
+	var possibleGames []game
 	for index := range games {
-		fmt.Println(games[index])
+		if isGamePossible(games[index]) {
+			possibleGames = append(possibleGames, games[index])
+		}
 	}
-	return -1
+	possibleGamesSum := 0
+	for i := 0; i < len(possibleGames); i++ {
+		sum, err := strconv.Atoi(possibleGames[i].gameId)
+		if err != nil {
+			panic(err)
+		}
+		possibleGamesSum += sum
+	}
+	return possibleGamesSum
 }
 
 func SolvePartTwo(input string) int {
