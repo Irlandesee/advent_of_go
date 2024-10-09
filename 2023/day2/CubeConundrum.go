@@ -84,7 +84,7 @@ func isGamePossible(g *game) bool {
 	return true
 }
 
-func parteInput(input string) []game {
+func parseInput(input string) []game {
 	lines := strings.Split(input, "\n")
 	var games []game
 	for i := 0; i < len(lines); i++ {
@@ -95,8 +95,7 @@ func parteInput(input string) []game {
 }
 
 func SolvePartOne(input string) int {
-	fmt.Println("Solving part one")
-	games := parteInput(input)
+	games := parseInput(input)
 	var possibleGames []game
 	for index := range games {
 		if isGamePossible(&games[index]) {
@@ -110,12 +109,33 @@ func SolvePartOne(input string) int {
 			panic(err)
 		}
 		possibleGamesSum += sum
-		fmt.Println(sum)
+		//fmt.Println(sum)
 	}
 	return possibleGamesSum
 }
 
 func SolvePartTwo(input string) int {
-	//TODO
-	return -1
+	games := parseInput(input)
+
+	totalPowerSum := 0
+	for index := range games {
+		g := games[index]
+		currReds := 0
+		currGreens := 0
+		currBlues := 0
+		for i := 0; i < len(g.sets); i++ {
+			if g.sets[i].numReds > currReds {
+				currReds = g.sets[i].numReds
+			}
+			if g.sets[i].numGreens > currGreens {
+				currGreens = g.sets[i].numGreens
+			}
+			if g.sets[i].numBlues > currBlues {
+				currBlues = g.sets[i].numBlues
+			}
+		}
+		currPowerSum := currReds * currGreens * currBlues
+		totalPowerSum += currPowerSum
+	}
+	return totalPowerSum
 }
