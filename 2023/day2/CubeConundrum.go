@@ -23,21 +23,12 @@ func newGame() *game {
 	return &g
 }
 
-func cleanSets(sets []string) []string {
-	var cleanedSets []string
-	for i := 0; i < len(sets); i++ {
-		s := strings.TrimSpace(sets[i])
-		cleanedSets = append(cleanedSets, s)
-	}
-	return cleanedSets
-}
-
-func parseStruct(line string) game {
+func parseStruct(line string) *game {
 	divider := strings.Split(line, ":")
 	//Parse game id
 	gameId := strings.Split(divider[0], " ")[1]
-	g := game{gameId: gameId}
-	g.sets = make(map[int]set)
+	g := newGame()
+	g.gameId = gameId
 	numReds := 0
 	numGreens := 0
 	numBlues := 0
@@ -78,25 +69,19 @@ func parseStruct(line string) game {
 	return g
 }
 
-func isGamePossible(g game) bool {
-	maxReds := 12
-	maxGreens := 13
-	maxBlues := 14
+func isGamePossible(g *game) bool {
+	const maxReds = 12
+	const maxGreens = 13
+	const maxBlues = 14
 
-	totalReds := 0
-	totalGreens := 0
-	totalBlues := 0
-
+	fmt.Println("Checking game: ", *g)
 	for i := 0; i < len(g.sets); i++ {
-		totalReds += g.sets[i].numReds
-		totalGreens += g.sets[i].numGreens
-		totalBlues += g.sets[i].numBlues
+		if g.sets[i].numReds > maxReds || g.sets[i].numGreens > maxGreens || g.sets[i].numBlues > maxBlues {
+			return false
+		}
 	}
-	if totalReds < maxReds && totalGreens < maxGreens && totalBlues < maxBlues {
-		fmt.Println("Found possible game: ", g)
-		return true
-	}
-	return false
+	fmt.Println("Found possible game: ", *g)
+	return true
 }
 
 func parteInput(input string) []game {
@@ -104,7 +89,7 @@ func parteInput(input string) []game {
 	var games []game
 	for i := 0; i < len(lines); i++ {
 		game := parseStruct(lines[i])
-		games = append(games, game)
+		games = append(games, *game)
 	}
 	return games
 }
@@ -114,7 +99,7 @@ func SolvePartOne(input string) int {
 	games := parteInput(input)
 	var possibleGames []game
 	for index := range games {
-		if isGamePossible(games[index]) {
+		if isGamePossible(&games[index]) {
 			possibleGames = append(possibleGames, games[index])
 		}
 	}
@@ -125,6 +110,7 @@ func SolvePartOne(input string) int {
 			panic(err)
 		}
 		possibleGamesSum += sum
+		fmt.Println(sum)
 	}
 	return possibleGamesSum
 }
