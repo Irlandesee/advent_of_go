@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/Irlandesee/advent_of_go/2023/day2"
 	"github.com/Irlandesee/advent_of_go/2023/day3"
+	"github.com/Irlandesee/advent_of_go/2023/day4"
 	"github.com/Irlandesee/advent_of_go/2023/util"
 )
 
@@ -48,6 +49,17 @@ func solveDayThree() {
 	fmt.Println("-------------END TEST DAY 3 PART ONE---------------")
 }
 
+func solveDayFour() {
+	fmt.Println("-------------BEGIN TEST DAY 4 PART ONE---------------")
+	resPartOne := day4.SolvePartOne(util.ReadFile("2023/day4/inputs/test"))
+	if resPartOne != 13 {
+		fmt.Printf("Wrong result! Should be %d\n", resPartOne)
+	} else {
+		fmt.Printf("Correct result! Should be %d\n", resPartOne)
+	}
+	fmt.Println("-------------END TEST DAY 4 PART ONE---------------")
+}
+
 func main() {
-	solveDayThree()
+	solveDayFour()
 }

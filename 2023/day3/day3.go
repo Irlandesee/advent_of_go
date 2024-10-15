@@ -4,7 +4,7 @@ type NumberMap [][]string
 
 func parseInput(input *string) {
 	for i := 0; i < len(*input); i++ {
-		charAt := (*input)[i]
+		//charAt := (*input)[i]
 		// use runes
 	}
 
