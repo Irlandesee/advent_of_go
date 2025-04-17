@@ -36,7 +36,7 @@ func parseGame(line string) {
 	winNumbers := strings.Split(cardWinningNumbers, " ")
 	numbers := strings.Split(cardNumbers, " ")
 
-	g := newGame()
+	g := newGame(len(winNumbers), len(numbers))
 	g.gameId = gameId
 	for index := range winNumbers {
 		g.winNumbers[index], err = strconv.Atoi(winNumbers[index])
@@ -53,10 +53,15 @@ func parseGame(line string) {
 	fmt.Println(g)
 }
 
-func newGame() *game {
+/*
+*
+A real game has 10 winning numbers
+and 25 "normal" numbers
+*/
+func newGame(winNumbersLength int, numbersLength int) *game {
 	var g game
-	g.winNumbers = make([]int, 5)
-	g.numbers = make([]int, 8)
+	g.winNumbers = make([]int, winNumbersLength)
+	g.numbers = make([]int, numbersLength)
 	return &g
 }
 
