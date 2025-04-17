@@ -2,6 +2,7 @@ package day4
 
 import (
 	"fmt"
+	"regexp"
 	"strconv"
 	"strings"
 )
@@ -23,8 +24,14 @@ func parseGame(line string) {
 	cardWinningNumbers := strings.Split(divider[1], "|")[0]
 	cardNumbers := strings.Split(divider[1], "|")[1]
 
-	cardWinningNumbers = strings.TrimSpace(cardWinningNumbers)
-	cardNumbers = strings.TrimSpace(cardNumbers)
+	cardWinningNumbers = strings.TrimLeft(cardWinningNumbers, " \t\n\r")
+	cardWinningNumbers = strings.TrimRight(cardWinningNumbers, " \t\n\r")
+	cardNumbers = strings.TrimLeft(cardNumbers, " \t\n\r")
+	cardNumbers = strings.TrimRight(cardNumbers, " \t\n\r")
+
+	var re = regexp.MustCompile(`\s{2}`)
+	cardWinningNumbers = re.ReplaceAllString(cardWinningNumbers, " ")
+	cardNumbers = re.ReplaceAllString(cardNumbers, " ")
 
 	winNumbers := strings.Split(cardWinningNumbers, " ")
 	numbers := strings.Split(cardNumbers, " ")
@@ -32,14 +39,13 @@ func parseGame(line string) {
 	g := newGame()
 	g.gameId = gameId
 	for index := range winNumbers {
-		g.winNumbers[index], err = strconv.Atoi(num)
+		g.winNumbers[index], err = strconv.Atoi(winNumbers[index])
 		if err != nil {
 			panic(err)
 		}
 	}
 	for index := range numbers {
-		fmt.Println(num)
-		g.numbers[index], err = strconv.Atoi(num)
+		g.numbers[index], err = strconv.Atoi(numbers[index])
 		if err != nil {
 			panic(err)
 		}
