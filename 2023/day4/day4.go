@@ -7,7 +7,7 @@ import (
 	"strings"
 )
 
-type game struct {
+type Game struct {
 	gameId     int
 	winNumbers []int
 	numbers    []int
@@ -58,8 +58,8 @@ func parseGame(line string) {
 A real game has 10 winning numbers
 and 25 "normal" numbers
 */
-func newGame(winNumbersLength int, numbersLength int) *game {
-	var g game
+func newGame(winNumbersLength int, numbersLength int) *Game {
+	var g Game
 	g.winNumbers = make([]int, winNumbersLength)
 	g.numbers = make([]int, numbersLength)
 	return &g
