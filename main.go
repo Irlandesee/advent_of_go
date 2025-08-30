@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+
 	"github.com/Irlandesee/advent_of_go/2023/day2"
 	"github.com/Irlandesee/advent_of_go/2023/day3"
 	"github.com/Irlandesee/advent_of_go/2023/day4"
@@ -51,13 +52,29 @@ func solveDayThree() {
 
 func solveDayFour() {
 	fmt.Println("-------------BEGIN TEST DAY 4 PART ONE---------------")
-	resPartOne := day4.SolvePartOne(util.ReadFile("2023/day4/inputs/test"))
-	if resPartOne != 13 {
+	resTestPartOne := day4.SolvePartOne(util.ReadFile("2023/day4/inputs/test"))
+	if resTestPartOne != 13 {
+		fmt.Printf("Wrong result! Should be %d\n", resTestPartOne)
+	} else {
+		fmt.Printf("Correct result! Should be %d\n", resTestPartOne)
+	}
+	fmt.Println("-------------END TEST DAY 4 PART ONE---------------")
+	resPartOne := day4.SolvePartOne(util.ReadFile("2023/day4/inputs/input"))
+	fmt.Println("Res part one ", resPartOne)
+	if resPartOne != 18653 {
 		fmt.Printf("Wrong result! Should be %d\n", resPartOne)
 	} else {
 		fmt.Printf("Correct result! Should be %d\n", resPartOne)
 	}
-	fmt.Println("-------------END TEST DAY 4 PART ONE---------------")
+	fmt.Println("-------------BEGIN TEST DAY 4 PART TWO---------------")
+	resTestPartTwo := day4.SolvePartTwo(util.ReadFile("2023/day4/inputs/test"))
+	if resTestPartTwo != 30 {
+		fmt.Printf("Wrong result! Should be %d, got: %d\n", 30, resTestPartTwo)
+	} else {
+		fmt.Printf("Correct result! Should be %d\n", resTestPartTwo)
+	}
+	fmt.Println("-------------END TEST DAY 4 PART TWO---------------")
+
 }
 
 func main() {

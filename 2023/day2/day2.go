@@ -25,14 +25,14 @@ func newGame() *game {
 
 func parseStruct(line string) *game {
 	divider := strings.Split(line, ":")
-	//Parse game id
+	// Parse game id
 	gameId := strings.Split(divider[0], " ")[1]
 	g := newGame()
 	g.gameId = gameId
 	numReds := 0
 	numGreens := 0
 	numBlues := 0
-	//Parse sets
+	// Parse sets
 	divider[1] = strings.TrimSpace(divider[1])
 	sets := strings.Split(divider[1], ";")
 	for i := 0; i < len(sets); i++ {
@@ -52,7 +52,7 @@ func parseStruct(line string) *game {
 					panic(err)
 				}
 				numGreens += greens
-			} else { //blue
+			} else { // blue
 				blues, err := strconv.Atoi(t[0])
 				if err != nil {
 					panic(err)
@@ -109,7 +109,7 @@ func SolvePartOne(input string) int {
 			panic(err)
 		}
 		possibleGamesSum += sum
-		//fmt.Println(sum)
+		// fmt.Println(sum)
 	}
 	return possibleGamesSum
 }
